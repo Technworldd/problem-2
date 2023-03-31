@@ -1,0 +1,53 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Product> products = Arrays.asList(
+            new Product("Green Tea", 2022, 10.0),
+            new Product("Black Tea", 2022, 5.0),
+            new Product("Herbal Tea", 2021, 8.0),
+            new Product("Iced Tea", 2021, 12.0),
+            new Product("Chai Tea", 2023, 15.0)
+        );
+        
+        Map<Integer, Double> teaTotalsByYear = new HashMap<>();
+        for (Product product : products) {
+            if (product.getName().contains("Tea")) {
+                int year = product.getYear();
+                double price = product.getPrice();
+                teaTotalsByYear.put(year, teaTotalsByYear.getOrDefault(year, 0.0) + price);
+            }
+        }
+        
+        System.out.println("Tea totals by year:");
+        for (Map.Entry<Integer, Double> entry : teaTotalsByYear.entrySet()) {
+            int year = entry.getKey();
+            double total = entry.getValue();
+            System.out.println(year + ": " + total);
+        }
+    }
+}
+
+class Product {
+    private String name;
+    private int year;
+    private double price;
+    
+    public Product(String name, int year, double price) {
+        this.name = name;
+        this.year = year;
+        this.price = price;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public int getYear() {
+        return year;
+    }
+    
+    public double getPrice() {
+        return price;
+    }
+}
